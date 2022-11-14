@@ -2,9 +2,9 @@ name: Preview
 
 on:
   push:
-    branches: [release, develop]
+    branches: [release]
   pull_request:
-    branches: [release, develop]
+    branches: [release]
     types: [closed]
 
 jobs:
