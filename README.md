@@ -12,4 +12,6 @@ The application only displays music in the browser if you have premium access, o
 
 - [Spotify clone - figma](<https://www.figma.com/file/MQcRmzvv3GyM3iHEBwE2gg/Spotify-UI-Concept-(Community)?node-id=1340%3A726>)
 
-- [Spotify clone - livepage](https://spotify-xi-nine.vercel.app/)
+- [Spotify clone - main](https://spotify-fdgbatarse.vercel.app/)
+- [Spotify clone - release](https://spotify-fdgbatarse-release.vercel.app/)
+- [Spotify clone - develop](https://spotify-fdgbatarse-develop.vercel.app/)
