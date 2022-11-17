@@ -1,5 +1,8 @@
 module.exports = {
-  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -8,6 +11,12 @@ module.exports = {
       fontSize: {
         xxs: '.5rem',
       },
+      colors: {
+        'spotify-100': '#22C55E',
+        'spotify-200': '#35B765',
+        'spotify-300': '#2D9654',
+      },
+
       width: {
         '100px': '100px',
         '200px': '200px',

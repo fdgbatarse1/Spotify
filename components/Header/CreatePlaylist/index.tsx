@@ -89,34 +89,41 @@ const CreatePlaylist = () => {
           <div>Playlist created</div>
         ) : (
           <form
-            className='flex flex-col gap-6 font-inter text-sm sm:text-base md:text-lg text-left font-medium'
+            className="flex flex-col gap-6 font-inter text-sm sm:text-base md:text-lg text-left font-medium"
             onSubmit={(e) => e.preventDefault()}
           >
-            <h2 className='text-center'>Create playlist</h2>
-            <div className='relative flex flex-col items-start'>
-              <label htmlFor='name' className='flex gap-4 w-full'>
+            <h2 className="text-center">Create playlist</h2>
+            <div className="relative flex flex-col items-start">
+              <label htmlFor="name" className="flex gap-4 w-full">
                 Name
-                <input {...name.input} className='flex-auto text-base w-full text-gray-400' />
+                <input
+                  {...name.input}
+                  className="flex-auto text-base w-full text-gray-400"
+                />
               </label>
-              {name.error && <p className='text-base text-red-500 w-full'>{name.error}</p>}
+              {name.error && (
+                <p className="text-base text-red-500 w-full">{name.error}</p>
+              )}
             </div>
-            <div className='relative flex flex-col items-start'>
-              <label htmlFor='name' className='flex gap-4 w-full'>
+            <div className="relative flex flex-col items-start">
+              <label htmlFor="name" className="flex gap-4 w-full">
                 Description
                 <input
                   {...description.input}
-                  className='flex-auto text-base w-full text-gray-400'
+                  className="flex-auto text-base w-full text-gray-400"
                 />
               </label>
               {description.error && (
-                <p className='text-base text-red-500 w-full'>{description.error}</p>
+                <p className="text-base text-red-500 w-full">
+                  {description.error}
+                </p>
               )}
             </div>
-            <div className='flex flex-col justify-around w-full'>
+            <div className="flex flex-col justify-around w-full">
               <label>
                 <input
-                  type='radio'
-                  value='public'
+                  type="radio"
+                  value="public"
                   checked={privacy === 'public'}
                   onChange={onPrivacyChange}
                 />
@@ -124,23 +131,23 @@ const CreatePlaylist = () => {
               </label>
               <label>
                 <input
-                  type='radio'
-                  value='private'
+                  type="radio"
+                  value="private"
                   checked={privacy === 'private'}
                   onChange={onPrivacyChange}
                 />
                 Private
               </label>
             </div>
-            <div className='flex justify-around items-center'>
+            <div className="flex justify-around items-center">
               <button
-                className='hover:text-green-500 pointer'
+                className="hover:text-green-500 pointer"
                 onClick={() => confirmationHandler(true)}
               >
                 Yes
               </button>
               <button
-                className='hover:text-green-500 pointer'
+                className="hover:text-green-500 pointer"
                 onClick={() => confirmationHandler(false)}
               >
                 No
@@ -150,11 +157,11 @@ const CreatePlaylist = () => {
         )}
       </Modal>
       <div
-        className='flex py-1 px-1 sm:pl-3 sm:pr-4 bg-gray-200 rounded-full hover:opacity-70 cursor-pointer font-inter text-gray-500'
+        className="flex py-2 px-2 sm:pl-3 sm:pr-4 rounded-full  cursor-pointer font-inter text-gray-200 bg-gradient-to-r from-spotify-100 via-spotify-200 to-spotify-300 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-spotify-100 dark:focus:ring-lime-800 shadow-lg shadow-spotify-300/50 dark:shadow-lg dark:shadow-lime-800/80 font-normal text-base text-center mr-2 mb-2"
         onClick={debounce(handler, 300)}
       >
-        <BsPlus className='text-gray-500 text-2xl' />{' '}
-        <span className='hidden sm:block '>Playlist</span>
+        <BsPlus className="text-gray-200 text-2xl" />{' '}
+        <span className="hidden sm:block ">Playlist</span>
       </div>
     </div>
   );
