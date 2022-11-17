@@ -17,10 +17,10 @@ const Modal = ({ show, onClose, children, title }: IModal) => {
 
   const modalContent = show ? (
     <div
-      className='absolute top-0 left-0 flex justify-center items-center w-full h-full z-30'
+      className="absolute top-0 left-0 flex justify-center items-center w-full h-full z-30"
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
     >
-      <div className='p-2 sm:p-4 max-w-260px sm:max-w-xs lg:max-w-none rounded bg-white'>
+      <div className="p-2 sm:p-4 max-w-260px sm:max-w-xs lg:max-w-none rounded">
         {title && <div>{title}</div>}
         <div>{children}</div>
       </div>
