@@ -13,7 +13,8 @@ const AddToPlaylist = ({ id }: { id: string | undefined }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState('');
-  const [myPlaylists, setMyPlaylists] = useState<SpotifyApi.PlaylistObjectSimplified[]>();
+  const [myPlaylists, setMyPlaylists] =
+    useState<SpotifyApi.PlaylistObjectSimplified[]>();
 
   useEffect(() => {
     const getPlaylistsAsync = async () => {
@@ -55,36 +56,47 @@ const AddToPlaylist = ({ id }: { id: string | undefined }) => {
 
   return (
     <div>
-      <Modal onClose={() => setShowModal(false)} show={showModal}>
+      <Modal
+        onClose={() => setShowModal(false)}
+        withoutbackground
+        show={showModal}
+      >
         {message ? (
-          <div>{message}</div>
+          <div className="flex flex-col gap-6 font-inter text-sm rounded-xl sm:text-base md:text-lg text-center dark:bg-spotify-200 text-white p-8 font-medium">
+            {message}
+          </div>
         ) : (
-          <div className='flex flex-col gap-6 font-inter text-sm sm:text-base md:text-lg text-center font-medium'>
-            <p className='font-inter font-bold'>Add track to</p>
-            <div className='flex flex-col max-h-72 overflow-y-auto'>
+          <div className="flex  font-mediumflex flex-col gap-6 font-inter text-sm rounded-xl sm:text-base md:text-lg text-center dark:bg-spotify-200 text-white p-8 font-medium">
+            <p className="font-inter font-bold">Add track to</p>
+            <div className="flex flex-col max-h-72 overflow-y-auto w-full rounded-xl bg-gray-200 text-black ">
               {myPlaylists &&
                 myPlaylists.map((playlist) => {
                   return (
                     <button
+                      className="hover:bg-gray-900 hover:text-white p-2"
                       key={playlist.id}
-                      onClick={() => confirmationHandler(playlist.id, playlist.name)}
+                      onClick={() =>
+                        confirmationHandler(playlist.id, playlist.name)
+                      }
                     >
                       {playlist?.name}
                     </button>
                   );
                 })}
             </div>
-            <p
-              className='font-inter font-medium cursor-pointer'
-              onClick={() => setShowModal(false)}
-            >
-              Close
-            </p>
+            <div>
+              <p
+                className="border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 hover:text-white pointer"
+                onClick={() => setShowModal(false)}
+              >
+                Close
+              </p>
+            </div>
           </div>
         )}
       </Modal>
       <VscLibrary
-        className='text-base md:text-lg lg:text-2xl min-w-32px cursor-pointer'
+        className="text-base md:text-lg lg:text-2xl min-w-32px cursor-pointer"
         onClick={debounce(handler, 300)}
       />
     </div>

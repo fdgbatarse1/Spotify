@@ -9,6 +9,7 @@ const nextConfig = {
       'www.chicagotribune.com',
       'api.spotify.com',
       'mosaic.scdn.co',
+      'lineup-images.scdn.co',
     ],
   },
 };
