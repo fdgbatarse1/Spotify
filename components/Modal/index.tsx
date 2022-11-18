@@ -6,9 +6,16 @@ interface IModal {
   onClose: () => void;
   children?: React.ReactNode;
   title?: string;
+  withoutbackground?: boolean;
 }
 
-const Modal = ({ show, onClose, children, title }: IModal) => {
+const Modal = ({
+  show,
+  onClose,
+  children,
+  title,
+  withoutbackground,
+}: IModal) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -20,7 +27,13 @@ const Modal = ({ show, onClose, children, title }: IModal) => {
       className="absolute top-0 left-0 flex justify-center items-center w-full h-full z-30"
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
     >
-      <div className="p-2 sm:p-4 max-w-260px sm:max-w-xs lg:max-w-none rounded">
+      <div
+        className={`${
+          withoutbackground
+            ? 'rounded'
+            : 'p-2 sm:p-4 max-w-260px sm:max-w-xs lg:max-w-none rounded bg-white'
+        }`}
+      >
         {title && <div>{title}</div>}
         <div>{children}</div>
       </div>

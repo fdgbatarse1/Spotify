@@ -84,9 +84,15 @@ const CreatePlaylist = () => {
 
   return (
     <div>
-      <Modal onClose={() => setShowModal(false)} show={showModal}>
+      <Modal
+        onClose={() => setShowModal(false)}
+        withoutbackground
+        show={showModal}
+      >
         {success ? (
-          <div>Playlist created</div>
+          <div className="relative text rounded text-xl dark:bg-spotify-200 p-4  text-white">
+            Playlist created
+          </div>
         ) : (
           <div className="relative sm:p-0 max-w-260px sm:max-w-xs lg:max-w-none  w-96 rounded-lg shadow dark:bg-spotify-200">
             <button
