@@ -1,14 +1,23 @@
-import { BiPlay } from '@react-icons/all-files/bi/BiPlay';
-import { BiStop } from '@react-icons/all-files/bi/BiStop';
-import debounce from 'lodash/debounce';
+import { BiPlay } from "@react-icons/all-files/bi/BiPlay";
+import { BiStop } from "@react-icons/all-files/bi/BiStop";
+import debounce from "lodash/debounce";
 
-import useSpotify from '@/hooks/useSpotify';
+import useSpotify from "@/hooks/useSpotify";
 
-import { useAppDispatch, useAppSelector } from '@/lib/reduxHooks';
+import { useAppDispatch, useAppSelector } from "@/lib/reduxHooks";
 
-import { setCurrentTrack, setIsPlaying } from '@/store/features/tracks/tracksSlice';
+import {
+  setCurrentTrack,
+  setIsPlaying,
+} from "@/store/features/tracks/tracksSlice";
 
-const Play = () => {
+interface IPlay {
+  name?: string;
+  newTrack?: SpotifyApi.TrackObjectFull | SpotifyApi.TrackObjectSimplified;
+  context_uri?: string;
+}
+
+const Play = ({ newTrack, context_uri }: IPlay) => {
   const dispatch = useAppDispatch();
   const spotifyApi = useSpotify();
 
@@ -17,6 +26,22 @@ const Play = () => {
   const track = useAppSelector((state) => state.tracks.track);
 
   const handler = () => {
+    if (newTrack && context_uri) {
+      if (currentTrack?.id !== newTrack.id) {
+        dispatch(setCurrentTrack(newTrack));
+        dispatch(setIsPlaying(true));
+        spotifyApi.play({
+          context_uri: context_uri,
+          offset: {
+            uri: newTrack.uri,
+          },
+        });
+      } else {
+        dispatch(setIsPlaying(!isPlaying));
+      }
+      return;
+    }
+
     if (track) {
       if (currentTrack?.name !== track?.name) {
         dispatch(setCurrentTrack(track));
@@ -25,26 +50,32 @@ const Play = () => {
           uris: [track.uri],
         });
       } else {
-        if (!isPlaying) {
-          dispatch(setIsPlaying(true));
-        } else {
-          dispatch(setIsPlaying(false));
-        }
+        dispatch(setIsPlaying(!isPlaying));
       }
+      return;
     }
   };
+
+  if (newTrack) {
+    if (currentTrack?.id === newTrack.id) {
+      if (isPlaying) {
+        return <BiStop className="text-2xl cursor-pointer" onClick={handler} />;
+      }
+    }
+    return <BiPlay className="text-2xl cursor-pointer" onClick={handler} />;
+  }
 
   return (
     <>
       {currentTrack?.name !== track?.name || !isPlaying ? (
         <BiPlay
           onClick={debounce(handler, 300)}
-          className='text-gray-900 text-2xl sm:text-3xl xl:text-4xl'
+          className="text-gray-900 text-2xl sm:text-3xl xl:text-4xl"
         />
       ) : (
         <BiStop
           onClick={debounce(handler, 300)}
-          className='text-gray-900 text-2xl sm:text-3xl xl:text-4xl'
+          className="text-gray-900 text-2xl sm:text-3xl xl:text-4xl"
         />
       )}
     </>
