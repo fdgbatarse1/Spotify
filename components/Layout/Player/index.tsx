@@ -3,7 +3,6 @@ import { useAppSelector } from "@/lib/reduxHooks";
 import {
   setCurrentTrack,
   setIsPlaying,
-  setTrack,
 } from "@/store/features/tracks/tracksSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -69,7 +68,6 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
       }}
       play={isPlaying}
       uris={trackUri ? [trackUri] : [recentlyPlayed]}
-      offset={1}
     />
   );
 };
