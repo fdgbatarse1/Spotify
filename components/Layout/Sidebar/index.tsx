@@ -50,7 +50,7 @@ const renderThemeChanger = () => {
 
 const Sidebar = () => {
   return (
-    <nav className='row-start-3 md:row-start-1 md:flex flex-col gap-6 pt-2 md:p-6 bg-gray-200 border-t md:border-r border-gray-300'>
+    <nav className='row-start-3 md:row-start-1 md:flex flex-col gap-6 pt-2 md:p-6 bg-gray-200 border-t md:border-r border-gray-300 dark:bg-gray-700'>
       <div className='hidden md:flex justify-start items-center gap-4'>
         <FaSpotify className='text-5xl text-green-500 select-none' />
         <p className='text-green-500 font-bold text-3xl select-none'>Spotify</p>
