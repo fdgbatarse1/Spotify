@@ -17,6 +17,7 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
   const [recentlyPlayed, setRecentlyPlayed] = useState(
     "spotify:track:2JPLbjOn0wPCngEot2STUS"
   );
+  const [firstTime, setFirstTime] = useState(true);
   const dispatch = useDispatch();
   const spotifyApi = useSpotify();
 
@@ -58,6 +59,7 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
           dispatch(setIsPlaying(false));
         } else {
           dispatch(setIsPlaying(true));
+          setFirstTime(false);
         }
         if (state.track.uri !== trackUri) {
           dispatch(setCurrentTrack(state.track));
@@ -68,6 +70,7 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
       }}
       play={isPlaying}
       uris={trackUri ? [trackUri] : [recentlyPlayed]}
+      offset={firstTime ? undefined : -1}
     />
   );
 };
