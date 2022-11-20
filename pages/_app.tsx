@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { Provider } from 'react-redux';
 import { store } from '../store';
+import { ThemeProvider } from 'next-themes';
 
 import Layout from '@/components/Layout';
 
@@ -31,22 +32,26 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps }, router }: AppP
     router.pathname.valueOf() == '/your-library/playlists'
   ) {
     return (
-      <SessionProvider session={session}>
+      <ThemeProvider enableSystem={true} attribute="class">
+          <SessionProvider session={session}>
         <Provider store={store}>
           <Layout>
             <Component {...pageProps}></Component>
           </Layout>
         </Provider>
       </SessionProvider>
+      </ThemeProvider>
     );
   }
 
   return (
+    <ThemeProvider>
     <SessionProvider session={session}>
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
     </SessionProvider>
+    </ThemeProvider>
   );
 };
 
