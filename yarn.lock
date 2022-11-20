@@ -3754,7 +3754,7 @@ mute-stream@0.0.8:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-nano-css@^5.3.4:
+nano-css@^5.3.5:
   version "5.3.5"
   resolved "https://registry.yarnpkg.com/nano-css/-/nano-css-5.3.5.tgz#3075ea29ffdeb0c7cb6d25edb21d8f7fa8e8fe8e"
   integrity sha512-vSB9X12bbNu4ALBu7nigJgRViZ6ja3OU7CeuiV1zMIbXOdmkLahgtPmh3GBOlDxbKY0CitqlPdOReGlBLSp+yg==
@@ -4317,15 +4317,15 @@ react-redux@^8.0.0:
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
 
-react-spotify-web-playback@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/react-spotify-web-playback/-/react-spotify-web-playback-0.9.2.tgz#6fc1b57c3dfb1811e941fc73f3e7a21abe29aea4"
-  integrity sha512-iUbRV4FwWloY5l+5cyStv9m+dNtdOMHSiijic9ZuxfCApyft2bvk1ZmMfmmGZWBRrOu7D5cbUNj2gVo1tXv4gA==
+react-spotify-web-playback@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-spotify-web-playback/-/react-spotify-web-playback-0.10.0.tgz#f6a88f9f6b57fe994b2d592f5ec784a620ff4e55"
+  integrity sha512-znU0vVrCGOu1+jGX/YmQHsr7tXa1VrwRPvGaRA6NyPhml8XHJJ7X6CPYz2nCvBSg1XhQA2Iv0L5xIcswFcI4fg==
   dependencies:
     "@gilbarbara/react-range-slider" "^0.7.0"
     exenv "^1.2.2"
     memoize-one "^6.0.0"
-    nano-css "^5.3.4"
+    nano-css "^5.3.5"
 
 react@18.0.0:
   version "18.0.0"
