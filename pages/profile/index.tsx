@@ -38,7 +38,7 @@ const Artist = () => {
         <UserDescription />
         {!unsuccess && tracks && tracks?.total > 0 && (
           <div className='flex flex-col gap-2'>
-            <h4 className='text-2xl font-bold text-gray-900'>Top tracks</h4>
+            <h4 className='text-2xl font-bold text-gray-900 dark:text-white'>Top tracks</h4>
             <TracksList tracks={tracks.items} />
           </div>
         )}

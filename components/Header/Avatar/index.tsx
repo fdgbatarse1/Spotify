@@ -30,15 +30,15 @@ const Avatar = () => {
         onClick={onClickAvatar}
       >
         <Image src={avatar.src} alt={avatar.alt} width={28} height={28} className='rounded-full' />
-        <p className='text-gray-900 text-sm font-inter'>{avatar.name}</p>
+        <p className='text-gray-900 dark:text-white text-sm font-inter'>{avatar.name}</p>
         {isOpen ? (
-          <MdKeyboardArrowUp className='text-gray-900' />
+          <MdKeyboardArrowUp className='text-gray-900 dark:text-white' />
         ) : (
-          <MdKeyboardArrowDown className='text-gray-900' />
+          <MdKeyboardArrowDown className='text-gray-900 dark:text-white' />
         )}
       </div>
       {isOpen && (
-        <div className='absolute top-10 right-0 z-10 w-32 md:w-48 bg-gray-200 rounded font-inter text-left text-sm text-gray-900'>
+        <div className='absolute top-10 right-0 z-10 w-32 md:w-48 bg-gray-200 rounded font-inter text-left text-sm text-gray-900 dark:text-white'>
           <Link href={Routes.PROFILE}>
             <a className='block w-full px-2 py-2 hover:opacity-70'>{Navigation.PROFILE}</a>
           </Link>

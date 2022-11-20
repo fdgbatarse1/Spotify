@@ -39,12 +39,12 @@ const Play = () => {
       {currentTrack?.name !== track?.name || !isPlaying ? (
         <BiPlay
           onClick={debounce(handler, 300)}
-          className='text-gray-900 text-2xl sm:text-3xl xl:text-4xl'
+          className='text-gray-900 dark:text-white text-2xl sm:text-3xl xl:text-4xl'
         />
       ) : (
         <BiStop
           onClick={debounce(handler, 300)}
-          className='text-gray-900 text-2xl sm:text-3xl xl:text-4xl'
+          className='text-gray-900 dark:text-white text-2xl sm:text-3xl xl:text-4xl'
         />
       )}
     </>

@@ -10,7 +10,7 @@ interface ITrackItem {
 const AlbumTrackItem = ({ href, name, artists, duration }: ITrackItem) => {
   return (
     <Link href={href} passHref>
-      <tr className='font-inter cursor-pointer hover:bg-gray-200'>
+      <tr className='font-inter cursor-pointer hover:bg-gray-600'>
         <td>
           <div className='whitespace-nowrap max-w-260px md:max-w-260px lg:max-w-none p-2'>
             <h5 className='text-ellipsis overflow-hidden'>{name}</h5>
