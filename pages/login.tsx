@@ -16,12 +16,12 @@ const Login = ({ providers }: ILogin) => {
   const { status } = useSession();
 
   if (status === 'loading') {
-    return <div className='min-h-screen bg-gray-50' />;
+    return <div className='min-h-screen bg-gray-50 dark:bg-gray-800' />;
   }
 
   if (status === 'authenticated') {
     router.push(Routes.HOME);
-    return <div className='min-h-screen bg-gray-50' />;
+    return <div className='min-h-screen bg-gray-50 dark:bg-gray-800' />;
   }
 
   return (
@@ -29,7 +29,7 @@ const Login = ({ providers }: ILogin) => {
       <Head>
         <title>Log In | Spotify</title>
       </Head>
-      <main className='flex flex-col justify-center items-center gap-12 px-4 w-full min-h-screen bg-gray-50 text-center font-inter'>
+      <main className='flex flex-col justify-center items-center gap-12 px-4 w-full min-h-screen bg-gray-50 dark:bg-gray-800 text-center font-inter'>
         <div className='flex gap-4 items-center'>
           <FaSpotify fill='#22c55e' className='text-5xl md:text-7xl 2xl:text-8xl' />
           <p className='text-green-500 font-bold text-3xl md:text-5xl 2xl:text-6xl'>Spotify</p>
