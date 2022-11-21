@@ -16,7 +16,7 @@ const Button =  React.forwardRef(
       <a href={href} onClick={onClick} ref={ref}>
         <div
           className={`flex flex-col md:flex-row items-center gap-2 py-2 px-2 font-inter ${
-            router.pathname === href ? 'md:bg-gray-50 dark:bg-gray-300 md:rounded-lg text-white md:text-green-500' : 'text-gray-500'
+            router.pathname === href ? 'md:bg-gray-50 dark:bg-gray-300 md:rounded-lg text-green-500' : 'text-gray-500'
           }`}
         >
           {children}
