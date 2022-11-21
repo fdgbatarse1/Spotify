@@ -11,6 +11,10 @@ import {
   setCurrentTrack,
   setIsPlaying,
 } from "@/store/features/tracks/tracksSlice";
+import { useSession } from "next-auth/react";
+import { ICustomSession } from "@/types/common";
+
+import SaveTrackforCurrentUser from "../../../services/SaveTrackForCurrentUser";
 
 interface IPlayer {
   accesstoken: string | undefined;
@@ -36,7 +40,8 @@ const darkModeStyles = (isDark: boolean) => {
 };
 
 const Player = ({ accesstoken, trackUri }: IPlayer) => {
-  const [recentlyPlayed, setRecentlyPlayed] = useState(
+  const { data: session }: ICustomSession = useSession();
+  const [recentlyPlayed, setRecentlyPlayed] = useState<string>(
     "spotify:track:2JPLbjOn0wPCngEot2STUS"
   );
   const [firstTime, setFirstTime] = useState(true);
@@ -53,23 +58,23 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
   }, [dispatch, trackUri]);
 
   useEffect(() => {
-    const getMyRecentlyPlayedTracksAsync = async () => {
-      try {
+    if (spotifyApi.getAccessToken()) {
+      const getMyRecentlyPlayedTracksAsync = async () => {
         const data = await spotifyApi.getMyRecentlyPlayedTracks();
-        if (!data.body.items[0].track.uri) {
-          throw new Error("error");
-        }
-        const track = data.body.items[0].track.uri;
-        setRecentlyPlayed(track);
-      } catch {
-        setRecentlyPlayed("spotify:track:2JPLbjOn0wPCngEot2STUS");
-      }
-    };
+        setRecentlyPlayed(data.body.items[0].track.uri);
+      };
 
-    getMyRecentlyPlayedTracksAsync();
-  }, [spotifyApi]);
+      getMyRecentlyPlayedTracksAsync();
+    }
+  }, [recentlyPlayed, session?.user?.accessToken, spotifyApi]);
 
   if (!accesstoken) return null;
+  if (!recentlyPlayed) return null;
+  if (!spotifyApi.getAccessToken()) return null;
+
+  const save = (id: string) => {
+    SaveTrackforCurrentUser({ id: id, token: accesstoken });
+  };
 
   return (
     <div>
@@ -85,11 +90,20 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
               dispatch(setIsPlaying(false));
             } else {
               dispatch(setIsPlaying(true));
+              setFirstTime(false);
+            }
+            if (state.track.uri !== trackUri) {
+              dispatch(setCurrentTrack(state.track));
+            }
+            if (state.isSaved) {
+              save(state.track.id);
             }
           }}
           styles={darkModeStyles(currentTheme === "dark")}
           play={isPlaying}
           uris={trackUri ? [trackUri] : [recentlyPlayed]}
+          showSaveIcon
+          offset={firstTime ? undefined : -1}
         />
       ) : (
         <SpotifyPlayer
@@ -108,10 +122,14 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
             if (state.track.uri !== trackUri) {
               dispatch(setCurrentTrack(state.track));
             }
+            if (state.isSaved) {
+              save(state.track.id);
+            }
           }}
           styles={darkModeStyles(currentTheme === "dark")}
           play={isPlaying}
           uris={trackUri ? [trackUri] : [recentlyPlayed]}
+          showSaveIcon
           offset={firstTime ? undefined : -1}
         />
       )}
