@@ -1,19 +1,20 @@
-import { VscLibrary } from '@react-icons/all-files/vsc/VscLibrary';
-import debounce from 'lodash/debounce';
+import { VscLibrary } from "@react-icons/all-files/vsc/VscLibrary";
+import debounce from "lodash/debounce";
 
-import useSpotify from '@/hooks/useSpotify';
+import useSpotify from "@/hooks/useSpotify";
 
-import { useEffect, useState } from 'react';
-import Modal from '@/components/Modal';
-import { useRouter } from 'next/router';
-import { Routes } from '@/lib/enums';
+import { useEffect, useState } from "react";
+import Modal from "@/components/Modal";
+import { useRouter } from "next/router";
+import { Routes } from "@/lib/enums";
 
 const AddToPlaylist = ({ id }: { id: string | undefined }) => {
   const spotifyApi = useSpotify();
 
   const [showModal, setShowModal] = useState(false);
-  const [message, setMessage] = useState('');
-  const [myPlaylists, setMyPlaylists] = useState<SpotifyApi.PlaylistObjectSimplified[]>();
+  const [message, setMessage] = useState("");
+  const [myPlaylists, setMyPlaylists] =
+    useState<SpotifyApi.PlaylistObjectSimplified[]>();
 
   useEffect(() => {
     const getPlaylistsAsync = async () => {
@@ -36,7 +37,7 @@ const AddToPlaylist = ({ id }: { id: string | undefined }) => {
         await spotifyApi.addTracksToPlaylist(playlistId, [id]);
         setMessage(`Track saved in ${playlistName}`);
       } catch (e) {
-        if (typeof e === 'string') {
+        if (typeof e === "string") {
           setMessage(e);
         } else if (e instanceof Error) {
           setMessage(e.message);
@@ -44,7 +45,7 @@ const AddToPlaylist = ({ id }: { id: string | undefined }) => {
         setMessage("Couln't save track in playlist");
       } finally {
         setTimeout(() => {
-          setMessage('');
+          setMessage("");
           setShowModal(false);
         }, 2000);
       }
@@ -59,15 +60,17 @@ const AddToPlaylist = ({ id }: { id: string | undefined }) => {
         {message ? (
           <div>{message}</div>
         ) : (
-          <div className='flex flex-col gap-6 font-inter text-sm sm:text-base md:text-lg text-center font-medium'>
-            <p className='font-inter font-bold'>Add track to</p>
-            <div className='flex flex-col max-h-72 overflow-y-auto'>
+          <div className="flex flex-col gap-6 font-inter text-sm sm:text-base text-black md:text-lg text-center font-medium">
+            <p className="font-inter font-bold">Add track to</p>
+            <div className="flex flex-col max-h-72 overflow-y-auto">
               {myPlaylists &&
                 myPlaylists.map((playlist) => {
                   return (
                     <button
                       key={playlist.id}
-                      onClick={() => confirmationHandler(playlist.id, playlist.name)}
+                      onClick={() =>
+                        confirmationHandler(playlist.id, playlist.name)
+                      }
                     >
                       {playlist?.name}
                     </button>
@@ -75,7 +78,7 @@ const AddToPlaylist = ({ id }: { id: string | undefined }) => {
                 })}
             </div>
             <p
-              className='font-inter font-medium cursor-pointer'
+              className="font-inter font-medium cursor-pointer"
               onClick={() => setShowModal(false)}
             >
               Close
@@ -84,7 +87,7 @@ const AddToPlaylist = ({ id }: { id: string | undefined }) => {
         )}
       </Modal>
       <VscLibrary
-        className='text-base md:text-lg lg:text-2xl min-w-32px cursor-pointer'
+        className="text-base md:text-lg lg:text-2xl min-w-32px cursor-pointer"
         onClick={debounce(handler, 300)}
       />
     </div>
