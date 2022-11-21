@@ -13,7 +13,7 @@ const HorizontalList = ({ title, href, children }: IHorizontalList) => {
         <h3 className='text-2xl font-bold text-gray-900 dark:text-white'>{title}</h3>
         {href && (
           <Link href={href}>
-            <a className='text-sm font-medium text-gray-500'>SEE ALL</a>
+            <a className='text-sm font-medium text-gray-500 dark:text-white'>SEE ALL</a>
           </Link>
         )}
       </header>

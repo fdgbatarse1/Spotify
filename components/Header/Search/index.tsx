@@ -51,7 +51,7 @@ const Search = () => {
   return (
     <form onSubmit={onSubmitSearch} className='flex items-center w-full'>
       <button type='submit' className='p-2 rounded-l-full bg-gray-200'>
-        <AiOutlineSearch className='text-gray-500' />
+        <AiOutlineSearch className='text-gray-500 dark:text-gray-900' />
       </button>
       <label htmlFor='search' className='flex-auto'>
         <span className='absolute right-auto' style={{ left: '-999em' }}>
@@ -60,7 +60,7 @@ const Search = () => {
         <input
           {...search.input}
           onChange={onChangeSearch}
-          className='h-8 w-full outline-none rounded-r-full bg-gray-200 text-sm'
+          className='h-8 w-full outline-none rounded-r-full bg-gray-200 dark:text-black text-sm'
         />
       </label>
     </form>
