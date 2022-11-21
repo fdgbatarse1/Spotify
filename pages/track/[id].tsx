@@ -14,7 +14,7 @@ import AddToPlaylist from "@/components/Controls/AddToPlaylist";
 const Track = () => {
   useGetTrack();
 
-  const track = useAppSelector((state) => state.tracks.track);
+  const track: any = useAppSelector((state) => state.tracks.track);
   const trackError = useAppSelector((state) => state.tracks.trackError);
   const trackStatus = useAppSelector((state) => state.tracks.trackStatus);
 
