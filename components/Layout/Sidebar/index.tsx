@@ -23,7 +23,6 @@ const renderThemeChanger = () => {
 
   const currentTheme = theme === 'system' ? systemTheme : theme;
   
-  console.log(currentTheme)
 
   if(currentTheme === 'dark') {
     return (
