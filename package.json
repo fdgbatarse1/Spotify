@@ -9,6 +9,12 @@
     "lint": "next lint",
     "test": "jest"
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "pages/",
+      "pages"
+    ]
+  },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^1.8.1",
