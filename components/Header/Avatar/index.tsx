@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
-import { MdKeyboardArrowDown } from '@react-icons/all-files/md/MdKeyboardArrowDown';
-import { MdKeyboardArrowUp } from '@react-icons/all-files/md/MdKeyboardArrowUp';
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
+import { MdKeyboardArrowDown } from "@react-icons/all-files/md/MdKeyboardArrowDown";
+import { MdKeyboardArrowUp } from "@react-icons/all-files/md/MdKeyboardArrowUp";
 
-import avatarHelper from '@/lib/avatarHelper';
-import { Routes, Navigation } from '@/lib/enums';
+import avatarHelper from "@/lib/avatarHelper";
+import { Routes, Navigation } from "@/lib/enums";
 
 const Avatar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,13 +48,13 @@ const Avatar = () => {
       {isOpen && (
         <div className="absolute text-center top-10 right-0 z-10 w-32 m-2 md:w-48 bg-gradient-to-l from-spotify-100 via-spotify-200 to-spotify-300 rounded-xl font-inter  text-sm text-gray-200">
           <Link href={Routes.PROFILE}>
-            <a className="w-full block  py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-500 hover:rounded-xl  dark:hover:text-white">
+            <a className="w-full block  py-2 px-4 hover:bg-gray-500 hover:rounded-xl  hover:text-white">
               {Navigation.PROFILE}
             </a>
           </Link>
           <button
             onClick={onClickLogOut}
-            className="w-full block  py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-500 hover:rounded-xl dark:hover:text-white"
+            className="w-full block  py-2 px-4 hover:bg-gray-500 hover:rounded-xl hover:text-white"
           >
             {Navigation.LOG_OUT}
           </button>
