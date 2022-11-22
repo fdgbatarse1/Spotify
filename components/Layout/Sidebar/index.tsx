@@ -11,11 +11,7 @@ import { Status } from "@/lib/enums";
 import useGetMyPlaylists from "@/hooks/useGetMyPlaylists";
 import playlistHelper from "@/lib/playlistHelper";
 
-interface IMyPlaylistsPrev {
-  title: string;
-  href?: string;
-}
-const Sidebar = ({ title, href }: IMyPlaylistsPrev) => {
+const Sidebar = () => {
   useGetMyPlaylists(false);
   const playlists = useAppSelector((state) => state.playlists.playlists);
   const playlistsStatus = useAppSelector(
