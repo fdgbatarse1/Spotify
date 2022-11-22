@@ -33,7 +33,7 @@ const Layout = ({ children, title }: ILayout) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="grid grid-cols-phone-layout grid-rows-phone-layout md:grid-cols-layout md:grid-rows-layout lg:grid-rows-large-layout w-full min-h-screen bg-gray-50">
+      <div className="grid grid-cols-phone-layout grid-rows-phone-layout md:grid-cols-layout md:grid-rows-layout lg:grid-rows-large-layout w-full min-h-screen bg-gray-50 dark:bg-gray-800">
         <Sidebar />
         <div className="row-start-1 p-4 md:p-8 overflow-y-auto">{children}</div>
         {showPlayer && (
