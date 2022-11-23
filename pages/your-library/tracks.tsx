@@ -7,7 +7,8 @@ import useGetMySavedTracks from '@/hooks/useGetMySavedTracks';
 import { useAppSelector } from '@/lib/reduxHooks';
 
 const FavoriteTracks = () => {
-  useGetMySavedTracks(true);
+  const isSaved = useAppSelector((state) => state.tracks.isSaved);
+  useGetMySavedTracks(true, isSaved);
 
   const favoriteTracks = useAppSelector((state) => state.favorites.favoriteTracks);
   const favoriteTracksStatus = useAppSelector((state) => state.favorites.favoriteTracksStatus);
