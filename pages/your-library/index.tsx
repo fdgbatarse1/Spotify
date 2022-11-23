@@ -1,24 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import Header from '@/components/Header';
-import FavoriteAlbumsPrev from '@/components/Section/FavoriteAlbumsPrev';
-import FavoriteTracksPrev from '@/components/Section/FavoriteTracksPrev';
+import Header from "@/components/Header";
+import FavoriteAlbumsPrev from "@/components/Section/FavoriteAlbumsPrev";
+import FavoriteTracksPrev from "@/components/Section/FavoriteTracksPrev";
 
-import useCheckStatus from '@/hooks/useCheckStatus';
-import useGetMySavedAlbums from '@/hooks/useGetMySavedAlbums';
-import useGetMySavedTracks from '@/hooks/useGetMySavedTracks';
+import useCheckStatus from "@/hooks/useCheckStatus";
+import useGetMySavedAlbums from "@/hooks/useGetMySavedAlbums";
+import useGetMySavedTracks from "@/hooks/useGetMySavedTracks";
 
-import { NotFound } from '@/lib/enums';
+import { NotFound } from "@/lib/enums";
 
-import { Status } from '@/lib/enums';
-import { useAppSelector } from '@/lib/reduxHooks';
-import MyPlaylistsPrev from '@/components/Section/MyPlaylistsPrev';
+import { Status } from "@/lib/enums";
+import { useAppDispatch, useAppSelector } from "@/lib/reduxHooks";
+import MyPlaylistsPrev from "@/components/Section/MyPlaylistsPrev";
+import useGetMyPlaylists from "@/hooks/useGetMyPlaylists";
 
 const YourLibrary = () => {
   const [status, setStatus] = useState<Status>(Status.PENDING);
-
+  const isSaved = useAppSelector((state) => state.tracks.isSaved);
+  useGetMyPlaylists(false);
   useGetMySavedAlbums(false);
-  useGetMySavedTracks(false);
+  useGetMySavedTracks(false, isSaved);
 
   const myPlaylists = useAppSelector((state) => state.playlists.playlists);
   const favoriteAlbums = useAppSelector(

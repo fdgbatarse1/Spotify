@@ -5,6 +5,7 @@ import { SpotifyPlayerTrack } from "react-spotify-web-playback/lib";
 
 interface ITracksSlice {
   isPlaying: boolean;
+  isSaved: boolean;
   currentTrack:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.TrackObjectSimplified
@@ -29,6 +30,7 @@ interface ITracksSlice {
 
 const initialState: ITracksSlice = {
   isPlaying: false,
+  isSaved: false,
   currentTrack: null,
   track: null,
   trackError: "",
@@ -44,6 +46,9 @@ const tracksSlice = createSlice({
   reducers: {
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload;
+    },
+    setIsSaved: (state, action: PayloadAction<boolean>) => {
+      state.isSaved = action.payload;
     },
     setCurrentTrack: (
       state,
@@ -98,6 +103,7 @@ const tracksSlice = createSlice({
 
 export const {
   setIsPlaying,
+  setIsSaved,
   setCurrentTrack,
   setTrack,
   removeTrack,

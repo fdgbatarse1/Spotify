@@ -1,10 +1,10 @@
-import Card from '@/components/Card';
-import ErrorMessage from '@/components/Error/Message';
-import HorizontalList from '@/components/HorizontalList';
+import Card from "@/components/Card";
+import ErrorMessage from "@/components/Error/Message";
+import HorizontalList from "@/components/HorizontalList";
 
-import { Status } from '@/lib/enums';
-import { useAppSelector } from '@/lib/reduxHooks';
-import trackHelper from '@/lib/trackFullHelper';
+import { Status } from "@/lib/enums";
+import { useAppSelector } from "@/lib/reduxHooks";
+import trackHelper from "@/lib/trackFullHelper";
 
 interface IFavoriteTracksPrev {
   title: string;
@@ -12,13 +12,21 @@ interface IFavoriteTracksPrev {
 }
 
 const FavoriteTracksPrev = ({ title, href }: IFavoriteTracksPrev) => {
-  const favoriteTracks = useAppSelector((state) => state.favorites.favoriteTracks);
-  const favoriteTracksStatus = useAppSelector((state) => state.favorites.favoriteTracksStatus);
-  const favoriteTracksError = useAppSelector((state) => state.favorites.favoriteTracksError);
+  const favoriteTracks = useAppSelector(
+    (state) => state.favorites.favoriteTracks
+  );
+  const favoriteTracksStatus = useAppSelector(
+    (state) => state.favorites.favoriteTracksStatus
+  );
+  const favoriteTracksError = useAppSelector(
+    (state) => state.favorites.favoriteTracksError
+  );
 
   return (
     <HorizontalList title={title} href={href}>
-      {favoriteTracksStatus === Status.REJECTED && <ErrorMessage error={favoriteTracksError} />}
+      {favoriteTracksStatus === Status.REJECTED && (
+        <ErrorMessage error={favoriteTracksError} />
+      )}
       {favoriteTracksStatus === Status.FULFILLED &&
         favoriteTracks &&
         favoriteTracks.items.map((favoriteTrack) => {

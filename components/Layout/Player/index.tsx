@@ -9,6 +9,7 @@ import { useAppSelector } from "@/lib/reduxHooks";
 import {
   setCurrentTrack,
   setIsPlaying,
+  setIsSaved,
 } from "@/store/features/tracks/tracksSlice";
 import { useSession } from "next-auth/react";
 import { ICustomSession } from "@/types/common";
@@ -30,6 +31,7 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
   const spotifyApi = useSpotify();
 
   const isPlaying = useAppSelector((state) => state.tracks.isPlaying);
+  const isSaved = useAppSelector((state) => state.tracks.isSaved);
   const initialVolume = 50;
 
   useEffect(() => {
@@ -75,6 +77,9 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
           }
           if (state.isSaved) {
             save(state.track.id);
+            dispatch(setIsSaved(true));
+          } else {
+            dispatch(setIsSaved(false));
           }
         }}
         play={isPlaying}
@@ -84,6 +89,7 @@ const Player = ({ accesstoken, trackUri }: IPlayer) => {
           trackArtistColor: "xd",
           trackNameColor: "xd",
         }}
+        updateSavedStatus={(updateSavedStatus) => updateSavedStatus(isSaved)}
         uris={trackUri ? [trackUri] : [recentlyPlayed]}
         showSaveIcon
         offset={firstTime ? undefined : -1}
