@@ -1,6 +1,5 @@
-import albumTrackHelper from '@/lib/albumTrackHelper';
-import trackFullHelper from '@/lib/trackFullHelper';
-import TrackItem from '../TrackItem';
+import trackFullHelper from "@/lib/trackFullHelper";
+import TrackItem from "../TrackItem";
 
 interface ITrackList {
   tracks: SpotifyApi.TrackObjectFull[] | null | undefined;
@@ -9,7 +8,7 @@ interface ITrackList {
 
 const TracksList = ({ tracks, playlist }: ITrackList) => {
   return (
-    <table className='table-auto'>
+    <table className="table-auto">
       <tbody>
         {tracks &&
           tracks.map((track) => {
