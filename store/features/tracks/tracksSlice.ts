@@ -1,26 +1,42 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Slices, Status } from '@/lib/enums';
+import { Slices, Status } from "@/lib/enums";
+import { SpotifyPlayerTrack } from "react-spotify-web-playback/lib";
 
 interface ITracksSlice {
   isPlaying: boolean;
-  currentTrack: SpotifyApi.TrackObjectFull | null;
-  track: SpotifyApi.TrackObjectFull | null;
+  isSaved: boolean;
+  currentTrack:
+    | SpotifyApi.TrackObjectFull
+    | SpotifyApi.TrackObjectSimplified
+    | SpotifyPlayerTrack
+    | null;
+  track:
+    | SpotifyApi.TrackObjectFull
+    | SpotifyApi.TrackObjectSimplified
+    | SpotifyPlayerTrack
+    | null;
   trackError: string;
   trackStatus: Status;
-  tracks?: SpotifyApi.PagingObject<SpotifyApi.TrackObjectFull> | undefined | null;
+  tracks?:
+    | SpotifyApi.PagingObject<SpotifyApi.TrackObjectFull>
+    | SpotifyApi.PagingObject<SpotifyApi.TrackObjectSimplified>
+    | SpotifyApi.PagingObject<SpotifyPlayerTrack>
+    | undefined
+    | null;
   tracksError: string;
   tracksStatus: Status;
 }
 
 const initialState: ITracksSlice = {
   isPlaying: false,
+  isSaved: false,
   currentTrack: null,
   track: null,
-  trackError: '',
+  trackError: "",
   trackStatus: Status.PENDING,
   tracks: null,
-  tracksError: '',
+  tracksError: "",
   tracksStatus: Status.PENDING,
 };
 
@@ -31,10 +47,28 @@ const tracksSlice = createSlice({
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload;
     },
-    setCurrentTrack: (state, action: PayloadAction<SpotifyApi.TrackObjectFull | null>) => {
+    setIsSaved: (state, action: PayloadAction<boolean>) => {
+      state.isSaved = action.payload;
+    },
+    setCurrentTrack: (
+      state,
+      action: PayloadAction<
+        | SpotifyApi.TrackObjectFull
+        | SpotifyApi.TrackObjectSimplified
+        | SpotifyPlayerTrack
+        | null
+      >
+    ) => {
       state.currentTrack = action.payload;
     },
-    setTrack: (state, action: PayloadAction<SpotifyApi.TrackObjectFull>) => {
+    setTrack: (
+      state,
+      action: PayloadAction<
+        | SpotifyApi.TrackObjectFull
+        | SpotifyApi.TrackObjectSimplified
+        | SpotifyPlayerTrack
+      >
+    ) => {
       state.track = action.payload;
     },
     removeTrack: (state) => {
@@ -48,7 +82,13 @@ const tracksSlice = createSlice({
     },
     setTracks: (
       state,
-      action: PayloadAction<SpotifyApi.PagingObject<SpotifyApi.TrackObjectFull> | undefined | null>,
+      action: PayloadAction<
+        | SpotifyApi.PagingObject<SpotifyApi.TrackObjectFull>
+        | SpotifyApi.PagingObject<SpotifyApi.TrackObjectSimplified>
+        | SpotifyApi.PagingObject<SpotifyPlayerTrack>
+        | undefined
+        | null
+      >
     ) => {
       state.tracks = action.payload;
     },
@@ -63,6 +103,7 @@ const tracksSlice = createSlice({
 
 export const {
   setIsPlaying,
+  setIsSaved,
   setCurrentTrack,
   setTrack,
   removeTrack,

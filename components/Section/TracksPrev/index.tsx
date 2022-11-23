@@ -1,10 +1,10 @@
-import Card from '@/components/Card';
-import ErrorMessage from '@/components/Error/Message';
-import HorizontalList from '@/components/HorizontalList';
+import Card from "@/components/Card";
+import ErrorMessage from "@/components/Error/Message";
+import HorizontalList from "@/components/HorizontalList";
 
-import { Status } from '@/lib/enums';
-import { useAppSelector } from '@/lib/reduxHooks';
-import trackHelper from '@/lib/trackFullHelper';
+import { Status } from "@/lib/enums";
+import { useAppSelector } from "@/lib/reduxHooks";
+import trackHelper from "@/lib/trackFullHelper";
 
 interface ITracksPrev {
   title: string;
@@ -12,7 +12,7 @@ interface ITracksPrev {
 }
 
 const TracksPrev = ({ title, href }: ITracksPrev) => {
-  const tracks = useAppSelector((state) => state.tracks.tracks);
+  const tracks: any = useAppSelector((state) => state.tracks.tracks);
   const tracksStatus = useAppSelector((state) => state.tracks.tracksStatus);
   const tracksError = useAppSelector((state) => state.tracks.tracksError);
 
@@ -21,7 +21,7 @@ const TracksPrev = ({ title, href }: ITracksPrev) => {
       {tracksStatus === Status.REJECTED && <ErrorMessage error={tracksError} />}
       {tracksStatus === Status.FULFILLED &&
         tracks &&
-        tracks.items.map((track) => {
+        tracks.items.map((track: any) => {
           const newTrack = trackHelper({ track });
           return (
             <Card
