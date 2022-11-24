@@ -15,9 +15,10 @@ interface IPlay {
   name?: string;
   newTrack?: SpotifyApi.TrackObjectFull | SpotifyApi.TrackObjectSimplified;
   context_uri?: string;
+  uris?: string[];
 }
 
-const Play = ({ newTrack, context_uri }: IPlay) => {
+const Play = ({ newTrack, context_uri, uris }: IPlay) => {
   const dispatch = useAppDispatch();
   const spotifyApi = useSpotify();
 
@@ -26,6 +27,22 @@ const Play = ({ newTrack, context_uri }: IPlay) => {
   const track = useAppSelector((state) => state.tracks.track);
 
   const handler = () => {
+    if (newTrack && uris) {
+      if (currentTrack?.id !== newTrack.id) {
+        dispatch(setCurrentTrack(newTrack));
+        dispatch(setIsPlaying(true));
+        spotifyApi.play({
+          uris: uris,
+          offset: {
+            uri: newTrack.uri,
+          },
+        });
+      } else {
+        dispatch(setIsPlaying(!isPlaying));
+      }
+      return;
+    }
+
     if (newTrack && context_uri) {
       if (currentTrack?.id !== newTrack.id) {
         dispatch(setCurrentTrack(newTrack));

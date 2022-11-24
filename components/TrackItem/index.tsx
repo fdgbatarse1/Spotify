@@ -26,6 +26,7 @@ const TrackItem = ({
   duration,
   playlist,
   track,
+  uris,
 }: ITrackItem) => {
   const { data: session }: ICustomSession = useSession();
 
@@ -35,10 +36,10 @@ const TrackItem = ({
   return (
     <>
       {!playlist ? (
-        <div>
+        <>
           <tr className="font-inter cursor-pointer">
             <td>
-              <Play context_uri={currenPlaylist?.uri} newTrack={track} />
+              <Play uris={uris} newTrack={track} />
             </td>
             <td>
               <div className="flex items-center gap-4 p-2">
@@ -56,7 +57,7 @@ const TrackItem = ({
               <p className={`hidden lg:block`}>{duration}</p>
             </td>
           </tr>
-        </div>
+        </>
       ) : (
         <>
           <tr className="font-inter cursor-pointer">
