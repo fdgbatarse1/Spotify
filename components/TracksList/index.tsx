@@ -1,4 +1,5 @@
 import trackFullHelper from "@/lib/trackFullHelper";
+import { useEffect, useState } from "react";
 import TrackItem from "../TrackItem";
 
 interface ITrackList {
@@ -7,6 +8,15 @@ interface ITrackList {
 }
 
 const TracksList = ({ tracks, playlist }: ITrackList) => {
+  const [uris, setUris] = useState<string[] | undefined>(undefined);
+
+  useEffect(() => {
+    if (!playlist) {
+      const tracksUris = tracks?.map((track) => track.uri);
+      setUris(tracksUris);
+    }
+  }, [tracks, playlist]);
+
   return (
     <table className="table-auto">
       <tbody>
@@ -24,6 +34,7 @@ const TracksList = ({ tracks, playlist }: ITrackList) => {
                 image={newTrack.image}
                 album={newTrack.album}
                 track={track}
+                uris={uris}
               />
             );
           })}
